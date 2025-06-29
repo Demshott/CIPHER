@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡El Desafío Final de Bill Cipher!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Cutive+Mono&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Bill Cipher's Realm (Black, Cipher Yellow, Glitch Red, Glitch Cyan) -->
+    <!-- Application Structure Plan: A two-step challenge. First, a login screen requiring "OBSCURUS" to simulate a government-protected page. Upon successful login, the user proceeds to Bill Cipher's riddle and the final password entry. This structure adds an initial layer of security/mystery before the main challenge. The success screen provides a clear, thematic conclusion. -->
+    <!-- Visualization & Content Choices: 
+        - Login Screen: Goal: Implement initial access control. Method: Text-based prompt with input field (HTML/CSS). Interaction: Text input for "OBSCURUS". Justification: Adds a layer of mystery and security before the main riddle, fitting the "government-protected" theme. Library/Method: Vanilla JS, HTML/CSS.
+        - Bill's Riddle: Goal: Present the final challenge. Method: Text-based riddle with dramatic Bill Cipher styling (HTML/CSS, glitch effects). Interaction: Text input for the final key. Justification: Directly uses Bill Cipher's iconic presence and quotes for a climactic conclusion. Library/Method: Vanilla JS, HTML/CSS.
+        - Success Screen: Goal: Confirm successful completion. Method: Thematic text with glitch effects (HTML/CSS). Justification: Provides a clear and visually impactful confirmation of the user's success. Library/Method: Vanilla JS, HTML/CSS.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Special Elite', cursive;
+            background-color: #000000; /* Fondo negro para la temática de Bill Cipher */
+            background-image: none; /* Sin imagen de fondo */
+            color: #fef08a; /* Color amarillo de Bill Cipher */
+        }
+        .bill-cipher-section {
+            font-family: 'Cutive Mono', monospace;
+            animation: glitch 1s linear infinite;
+        }
+        .bill-cipher-input::placeholder {
+            color: #fef08a;
+            opacity: 0.5;
+        }
+        .glitch-text {
+            text-shadow: 
+                -1px -1px 0 #ff0000, /* Rojo para el efecto glitch */
+                1px 1px 0 #00ffff; /* Cian para el efecto glitch */
+            animation: glitch-text-anim 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch {
+            2%,64% { transform: translate(2px,0) skew(0deg); }
+            4%,60% { transform: translate(-2px,0) skew(0deg); }
+            62% { transform: translate(0,0) skew(5deg); }
+        }
+        @keyframes glitch-text-anim {
+            0% { text-shadow: -1px -1px 0 #ff0000, 1px 1px 0 #00ffff; }
+            100% { text-shadow: 1px 1px 0 #ff0000, -1px -1px 0 #00ffff; }
+        }
+        .government-seal {
+            font-size: 5rem;
+            color: #ccc;
+            opacity: 0.2;
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 transition-colors duration-1000">
+
+    <main id="riddle-container" class="w-full max-w-2xl mx-auto">
+
+        <!-- Login Screen: Government Protection -->
+        <div id="login-screen" class="p-8 md:p-12 rounded-lg text-gray-300 bg-gray-900 relative transition-opacity duration-500 border-4 border-gray-700 hidden">
+            <div class="government-seal select-none">🏛️</div>
+            <h1 class="text-3xl md:text-4xl font-bold mb-6 text-center">ACCESO RESTRINGIDO</h1>
+            <p class="text-xl italic text-center mb-8">"Este portal está protegido bajo el Protocolo de Seguridad Clase Omega del Gobierno. Se requiere una contraseña para el acceso."</p>
+            <div class="mt-8">
+                <input id="login-password" type="password" placeholder="Ingresa la contraseña..." class="w-full p-3 rounded-md border-2 border-gray-600 bg-gray-800 text-gray-200 focus:ring-gray-400 focus:border-gray-400 transition text-center">
+                <button onclick="checkLogin()" class="w-full mt-4 bg-gray-700 text-white p-3 rounded-md hover:bg-gray-600 transition-all duration-300 transform hover:scale-105 font-bold">ACCEDER</button>
+                <p id="login-feedback" class="text-center mt-4 text-red-500 font-bold h-6"></p>
+            </div>
+        </div>
+
+        <!-- Step 3: Bill Cipher's Challenge -->
+        <div id="step3" class="p-8 md:p-12 rounded-lg text-yellow-300 bg-black relative transition-opacity duration-500 border-4 border-yellow-400 hidden">
+            <div id="bill-container" class="bill-cipher-section">
+                <h1 class="text-3xl md:text-4xl font-bold mb-6 text-center glitch-text">¡UN INVITADO INESPERADO!</h1>
+                <div class="text-center text-5xl md:text-7xl mb-6">▲</div>
+                <p class="text-xl italic text-center mb-8">"¡Vaya, vaya, vaya! Parece que un saquito de carne logró llegar hasta aquí. Impresionante. Pero todos los juegos tienen un jefe final. Dime, mortal... ¿estás listo para hacer un trato?"</p>
+                <div class="bg-gray-900/50 p-6 rounded-md border border-dashed border-yellow-500">
+                    <p class="text-2xl italic text-center">"Lo veo todo, lo sé todo, y tu realidad no es más que un escenario para mi gran diseño. Te digo que compres oro, porque las ilusiones son mi negocio. ¿Quién soy yo, el maestro de la farsa de tu mente?"</p>
+                </div>
+                <div class="mt-8">
+                    <input id="answer3" type="text" placeholder="Pronuncia mi nombre..." class="w-full p-3 rounded-md border-2 border-yellow-400 bg-black text-yellow-300 focus:ring-yellow-300 focus:border-yellow-300 transition bill-cipher-input text-center">
+                    <button onclick="checkStep3()" class="w-full mt-4 bg-yellow-400 text-black p-3 rounded-md hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 font-bold">HACER UN TRATO</button>
+                    <p id="feedback3" class="text-center mt-4 text-red-500 font-bold h-6"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Screen -->
+        <div id="success" class="p-8 md:p-12 rounded-lg text-center hidden transition-opacity duration-500">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 glitch-text text-yellow-300">¡TRATO HECHO!</h1>
+            <div class="text-yellow-300 text-7xl md:text-9xl mb-8 bill-cipher-section">▲</div>
+            <p class="text-2xl md:text-3xl italic text-white/90">"¡LA REALIDAD ES UNA ILUSIÓN, EL UNIVERSO ES UN HOLOGRAMA, BIENVENIDO A BORDO! ¡ADIÓS!"</p>
+        </div>
+
+    </main>
+
+    <script>
+        function normalizeAnswer(str) {
+            return str.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
+        function switchStep(hideId, showId) {
+            const hideEl = document.getElementById(hideId);
+            const showEl = document.getElementById(showId);
+
+            hideEl.classList.add('opacity-0');
+            setTimeout(() => {
+                hideEl.classList.add('hidden');
+                showEl.classList.remove('hidden');
+                setTimeout(() => showEl.classList.remove('opacity-0'), 50); 
+            }, 500);
+        }
+
+        function checkLogin() {
+            const password = normalizeAnswer(document.getElementById('login-password').value);
+            const feedback = document.getElementById('login-feedback');
+            if (password === 'obscurus') {
+                feedback.textContent = 'Acceso concedido. Preparando la interfaz de seguridad...';
+                feedback.classList.remove('text-red-500');
+                feedback.classList.add('text-green-500');
+                setTimeout(() => switchStep('login-screen', 'step3'), 1500);
+            } else {
+                feedback.textContent = 'Acceso denegado. Contraseña incorrecta.';
+            }
+        }
+
+        function checkStep3() {
+            const answer = normalizeAnswer(document.getElementById('answer3').value);
+            const feedback = document.getElementById('feedback3');
+            const container = document.getElementById('riddle-container');
+
+            if (answer === 'bill cipher') {
+                feedback.textContent = '¡JAJAJAJAJA!';
+                feedback.classList.remove('text-red-500');
+                feedback.classList.add('text-yellow-300');
+                container.classList.add('bill-cipher-section'); // Apply glitch to container for overall effect
+                setTimeout(() => switchStep('step3', 'success'), 1500);
+            } else {
+                feedback.textContent = '¡Nombre equivocado, insecto!';
+            }
+        }
+
+        document.getElementById('login-password').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                checkLogin();
+            }
+        });
+
+        document.getElementById('answer3').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                checkStep3();
+            }
+        });
+        
+        // Initial fade in for login screen
+        window.onload = function() {
+            const loginScreen = document.getElementById('login-screen');
+            loginScreen.classList.remove('hidden');
+            setTimeout(() => loginScreen.classList.remove('opacity-0'), 50);
+        };
+    </script>
+</body>
+</html>
